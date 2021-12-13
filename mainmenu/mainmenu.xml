@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="menu.xsl" type="text/xsl"?>
+<main_menu>
+    <heading >
+        <header>Scripture Mastery </header>
+        <choice>Choose your mode</choice>
+        <practice>Practice Mode</practice>
+        <quiz>Quiz Mode</quiz>
+    </heading>
+   <Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_send"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Reports"
+    android:onClick="sendMessage" 
+    /> 
+</main_menu>

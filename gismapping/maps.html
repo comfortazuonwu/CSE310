@@ -1,0 +1,67 @@
+<html>
+<head>
+  <meta name="description" content="DevLab: Configure a popup">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>ArcGIS API for JavaScript Tutorials: Display a pop-up (JSAPI)</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.21/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.21/"></script>
+</head>
+
+ <script>
+
+  require([
+      "esri/config",
+      "esri/Map",
+      "esri/views/MapView",
+
+      "esri/layers/FeatureLayer"
+    ],
+
+    function(esriConfig,Map, MapView, FeatureLayer){
+
+     esriConfig.apiKey = "AAPK498b18fe53154ec4b7b3e02b579c39ab8E2q04IiPnBcWaySwu_pNwAe3E2lcrmteuV71G3a3A_nCE2U7clXUfLUZxcKFSXZ";
+
+      const map = new Map({
+        basemap: "arcgis-topographic" //Basemap layer service
+      });
+
+      const view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-118.80543,34.02700], //Longitude, latitude
+        zoom: 15
+      });
+
+      // Define a pop-up for Trailheads
+      const popupTrailheads = {
+        "title": "Trailhead",
+        "content": "<b>Trail:</b> {TRL_NAME}<br><b>Minimum Elevation:</b>{ELEV_MIN}ft<br><b>Maximum Elevation:</b>{ELEV_MAX}ft<br><b>Bikeable:</b>{USE_HIKE}<br>"
+      }
+
+    const trailheads = new FeatureLayer({
+        url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/ArcGIS/rest/services/Trails_Styled/FeatureServer/0",
+        outFields: ["TRL_NAME","ELEV_MIN","ELEV_MAX","USE_BIKE"],
+        popupTemplate: popupTrailheads
+      });
+
+      map.add(trailheads);
+
+    });
+  </script>
+
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
